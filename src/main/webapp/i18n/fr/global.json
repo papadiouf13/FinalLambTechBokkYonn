@@ -7,7 +7,15 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entités",
-        "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+        "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
+        "car": "Car",
+        "transporter": "Transporter",
+        "seat": "Seat",
+        "reservation": "Reservation",
+        "trip": "Trip",
+        "location": "Location",
+        "payment": "Payment",
+        "device": "Device"
       },
       "account": {
         "main": "Compte",

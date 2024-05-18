@@ -1,0 +1,61 @@
+{
+  "annotations": {
+    "changelogDate": "20240517165517"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "TripStatus",
+      "fieldValues": "SCHEDULED,IN_PROGRESS,COMPLETED,CANCELED"
+    },
+    {
+      "fieldName": "departureDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "arrivalDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Trip",
+  "relationships": [
+    {
+      "otherEntityName": "location",
+      "relationshipName": "departureLocation",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "location",
+      "relationshipName": "arrivalLocation",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "car",
+      "relationshipName": "car",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "transporter",
+      "relationshipName": "transporter",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (seat()) {
+      <div>
+        <h2 data-cy="seatDetailsHeading"><span jhiTranslate="bokyoonApp.seat.detail.title">Seat</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ seat()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.seat.seatNumber">Seat Number</span></dt>
+          <dd>
+            <span>{{ seat()!.seatNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.seat.isAvailable">Is Available</span></dt>
+          <dd>
+            <span>{{ seat()!.isAvailable }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.seat.car">Car</span></dt>
+          <dd>
+            @if (seat()!.car) {
+              <div>
+                <a [routerLink]="['/car', seat()!.car?.id, 'view']">{{ seat()!.car?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/seat', seat()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

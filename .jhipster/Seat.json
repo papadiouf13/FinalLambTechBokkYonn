@@ -1,0 +1,26 @@
+{
+  "annotations": {
+    "changelogDate": "20240517165515"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "seatNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "isAvailable",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "Seat",
+  "relationships": [
+    {
+      "otherEntityName": "car",
+      "relationshipName": "car",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

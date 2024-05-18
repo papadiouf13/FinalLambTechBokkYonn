@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20240517165519"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "status",
+      "fieldType": "PaymentStatus",
+      "fieldValues": "PENDING,SUCCESS,FAILED"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Payment",
+  "relationships": [
+    {
+      "otherEntityName": "reservation",
+      "relationshipName": "reservation",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

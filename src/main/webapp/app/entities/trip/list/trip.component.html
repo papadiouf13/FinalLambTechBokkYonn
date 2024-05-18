@@ -1,0 +1,184 @@
+<div>
+  <h2 id="page-heading" data-cy="TripHeading">
+    <span jhiTranslate="bokyoonApp.trip.home.title">Trips</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="bokyoonApp.trip.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-trip"
+        [routerLink]="['/trip/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="bokyoonApp.trip.home.createLabel">Créer un nouveau Trip</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (trips?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="bokyoonApp.trip.home.notFound">Aucun Trip trouvé</span>
+    </div>
+  }
+
+  @if (trips && trips.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.trip.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.trip.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.trip.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="departureDate">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.trip.departureDate">Departure Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="arrivalDate">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.trip.arrivalDate">Arrival Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="price">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.trip.price">Price</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="departureLocation.id">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.trip.departureLocation">Departure Location</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="arrivalLocation.id">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.trip.arrivalLocation">Arrival Location</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="car.id">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.trip.car">Car</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="transporter.id">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.trip.transporter">Transporter</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (trip of trips; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/trip', trip.id, 'view']">{{ trip.id }}</a>
+              </td>
+              <td>{{ trip.name }}</td>
+              <td>{{ trip.description }}</td>
+              <td [jhiTranslate]="'bokyoonApp.TripStatus.' + (trip.status ?? 'null')">
+                {{
+                  { null: '', SCHEDULED: 'SCHEDULED', IN_PROGRESS: 'IN_PROGRESS', COMPLETED: 'COMPLETED', CANCELED: 'CANCELED' }[
+                    trip.status ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ trip.departureDate }}</td>
+              <td>{{ trip.arrivalDate }}</td>
+              <td>{{ trip.price }}</td>
+              <td>
+                @if (trip.departureLocation) {
+                  <div>
+                    <a [routerLink]="['/location', trip.departureLocation.id, 'view']">{{ trip.departureLocation.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (trip.arrivalLocation) {
+                  <div>
+                    <a [routerLink]="['/location', trip.arrivalLocation.id, 'view']">{{ trip.arrivalLocation.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (trip.car) {
+                  <div>
+                    <a [routerLink]="['/car', trip.car.id, 'view']">{{ trip.car.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (trip.transporter) {
+                  <div>
+                    <a [routerLink]="['/transporter', trip.transporter.id, 'view']">{{ trip.transporter.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/trip', trip.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/trip', trip.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(trip)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,155 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-trip-heading" data-cy="TripCreateUpdateHeading" jhiTranslate="bokyoonApp.trip.home.createOrEditLabel">
+        Créer ou éditer un Trip
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="bokyoonApp.trip.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name" jhiTranslate="bokyoonApp.trip.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="bokyoonApp.trip.description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="bokyoonApp.trip.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'bokyoonApp.TripStatus.null' | translate }}</option>
+            @for (tripStatus of tripStatusValues; track $index) {
+              <option [value]="tripStatus">{{ 'bokyoonApp.TripStatus.' + tripStatus | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_departureDate" jhiTranslate="bokyoonApp.trip.departureDate">Departure Date</label>
+          <input
+            type="text"
+            class="form-control"
+            name="departureDate"
+            id="field_departureDate"
+            data-cy="departureDate"
+            formControlName="departureDate"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_arrivalDate" jhiTranslate="bokyoonApp.trip.arrivalDate">Arrival Date</label>
+          <input
+            type="text"
+            class="form-control"
+            name="arrivalDate"
+            id="field_arrivalDate"
+            data-cy="arrivalDate"
+            formControlName="arrivalDate"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_price" jhiTranslate="bokyoonApp.trip.price">Price</label>
+          <input type="number" class="form-control" name="price" id="field_price" data-cy="price" formControlName="price" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_departureLocation" jhiTranslate="bokyoonApp.trip.departureLocation"
+            >Departure Location</label
+          >
+          <select
+            class="form-control"
+            id="field_departureLocation"
+            data-cy="departureLocation"
+            name="departureLocation"
+            formControlName="departureLocation"
+            [compareWith]="compareLocation"
+          >
+            <option [ngValue]="null"></option>
+            @for (locationOption of locationsSharedCollection; track $index) {
+              <option [ngValue]="locationOption">{{ locationOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_arrivalLocation" jhiTranslate="bokyoonApp.trip.arrivalLocation">Arrival Location</label>
+          <select
+            class="form-control"
+            id="field_arrivalLocation"
+            data-cy="arrivalLocation"
+            name="arrivalLocation"
+            formControlName="arrivalLocation"
+            [compareWith]="compareLocation"
+          >
+            <option [ngValue]="null"></option>
+            @for (locationOption of locationsSharedCollection; track $index) {
+              <option [ngValue]="locationOption">{{ locationOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_car" jhiTranslate="bokyoonApp.trip.car">Car</label>
+          <select class="form-control" id="field_car" data-cy="car" name="car" formControlName="car" [compareWith]="compareCar">
+            <option [ngValue]="null"></option>
+            @for (carOption of carsSharedCollection; track $index) {
+              <option [ngValue]="carOption">{{ carOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_transporter" jhiTranslate="bokyoonApp.trip.transporter">Transporter</label>
+          <select
+            class="form-control"
+            id="field_transporter"
+            data-cy="transporter"
+            name="transporter"
+            formControlName="transporter"
+            [compareWith]="compareTransporter"
+          >
+            <option [ngValue]="null"></option>
+            @for (transporterOption of transportersSharedCollection; track $index) {
+              <option [ngValue]="transporterOption">{{ transporterOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

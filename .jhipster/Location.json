@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20240517165518"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "Double"
+    }
+  ],
+  "name": "Location",
+  "relationships": [],
+  "searchEngine": "no"
+}

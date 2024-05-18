@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20240517165516"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "departureTimme",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ReservationStatus",
+      "fieldValues": "PENDING,CONFIRMED,CANCELED"
+    },
+    {
+      "fieldName": "reservationNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    }
+  ],
+  "name": "Reservation",
+  "relationships": [
+    {
+      "otherEntityName": "trip",
+      "relationshipName": "trip",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "seat",
+      "relationshipName": "seat",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

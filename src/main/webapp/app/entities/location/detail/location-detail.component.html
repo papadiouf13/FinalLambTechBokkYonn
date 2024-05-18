@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (location()) {
+      <div>
+        <h2 data-cy="locationDetailsHeading"><span jhiTranslate="bokyoonApp.location.detail.title">Location</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ location()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.location.name">Name</span></dt>
+          <dd>
+            <span>{{ location()!.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.location.address">Address</span></dt>
+          <dd>
+            <span>{{ location()!.address }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.location.latitude">Latitude</span></dt>
+          <dd>
+            <span>{{ location()!.latitude }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.location.longitude">Longitude</span></dt>
+          <dd>
+            <span>{{ location()!.longitude }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/location', location()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

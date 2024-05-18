@@ -1,0 +1,20 @@
+{
+  "annotations": {
+    "changelogDate": "20240517163047"
+  },
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "User",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

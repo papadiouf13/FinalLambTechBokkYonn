@@ -1,0 +1,44 @@
+{
+  "annotations": {
+    "changelogDate": "20240517165520"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "platform",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "brand",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "token",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "model",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "osVersion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedAt",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Device",
+  "relationships": [],
+  "searchEngine": "no"
+}

@@ -1,0 +1,105 @@
+entity Car {
+   name String
+   description String
+   numberOfSeats Integer
+   numberOfAvailableSeats Integer
+   isActive Boolean
+   plateNumber String unique
+}
+entity Transporter {
+   name String
+   avatar String
+   phoneNumber String
+   isActive Boolean
+}
+
+
+entity Seat {
+   seatNumber Integer
+   isAvailable Boolean
+}
+enum ReservationStatus {
+   PENDING,
+   CONFIRMED,
+   CANCELED
+}
+
+
+entity Reservation {
+   departureTimme String
+   status ReservationStatus
+   reservationNumber String unique
+}
+enum TripStatus {
+   SCHEDULED,
+   IN_PROGRESS,
+   COMPLETED,
+   CANCELED
+}
+
+
+entity Trip {
+   name String
+   description String
+   status TripStatus
+   departureDate String
+   arrivalDate String
+   price Integer
+}
+
+
+entity Location {
+   name String
+   address String
+   latitude Double
+   longitude Double
+}
+enum PaymentPlatform {
+    K_PAY,
+   CREDIT_CARD,
+   WAVE,
+   OM,
+   FREE_MONEY,
+   ESPECIE
+}
+
+
+enum PaymentStatus {
+   PENDING,
+   SUCCESS,
+   FAILED
+}
+entity Payment {
+    status PaymentStatus
+    date String
+}
+entity Device {
+   platform String,
+   brand String,
+   token String required,
+   model String,
+   osVersion String,
+   isActive Boolean,
+   createdAt String,
+   updatedAt String,
+}
+
+
+relationship ManyToOne {
+
+    Trip{departureLocation} to Location
+    Trip{arrivalLocation} to Location
+    Trip{car} to Car
+    Trip{transporter} to Transporter
+    Car{transporter} to Transporter
+    Reservation{trip} to Trip
+    Reservation{seat} to Seat
+    Seat{car} to Car
+
+}
+
+relationship OneToOne {
+
+    Payment{reservation} to Reservation
+
+}

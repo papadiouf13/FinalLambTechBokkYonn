@@ -1,0 +1,10 @@
+{
+  "bokyoonApp": {
+    "PaymentStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "SUCCESS": "SUCCESS",
+      "FAILED": "FAILED"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-seat-heading" data-cy="SeatCreateUpdateHeading" jhiTranslate="bokyoonApp.seat.home.createOrEditLabel">
+        Créer ou éditer un Seat
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="bokyoonApp.seat.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_seatNumber" jhiTranslate="bokyoonApp.seat.seatNumber">Seat Number</label>
+          <input
+            type="number"
+            class="form-control"
+            name="seatNumber"
+            id="field_seatNumber"
+            data-cy="seatNumber"
+            formControlName="seatNumber"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_isAvailable" jhiTranslate="bokyoonApp.seat.isAvailable">Is Available</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isAvailable"
+            id="field_isAvailable"
+            data-cy="isAvailable"
+            formControlName="isAvailable"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_car" jhiTranslate="bokyoonApp.seat.car">Car</label>
+          <select class="form-control" id="field_car" data-cy="car" name="car" formControlName="car" [compareWith]="compareCar">
+            <option [ngValue]="null"></option>
+            @for (carOption of carsSharedCollection; track $index) {
+              <option [ngValue]="carOption">{{ carOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

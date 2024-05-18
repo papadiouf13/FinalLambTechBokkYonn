@@ -1,0 +1,11 @@
+{
+  "bokyoonApp": {
+    "TripStatus": {
+      "null": "",
+      "SCHEDULED": "SCHEDULED",
+      "IN_PROGRESS": "IN_PROGRESS",
+      "COMPLETED": "COMPLETED",
+      "CANCELED": "CANCELED"
+    }
+  }
+}

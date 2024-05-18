@@ -1,0 +1,83 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-device-heading" data-cy="DeviceCreateUpdateHeading" jhiTranslate="bokyoonApp.device.home.createOrEditLabel">
+        Créer ou éditer un Device
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="bokyoonApp.device.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_platform" jhiTranslate="bokyoonApp.device.platform">Platform</label>
+          <input type="text" class="form-control" name="platform" id="field_platform" data-cy="platform" formControlName="platform" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_brand" jhiTranslate="bokyoonApp.device.brand">Brand</label>
+          <input type="text" class="form-control" name="brand" id="field_brand" data-cy="brand" formControlName="brand" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_token" jhiTranslate="bokyoonApp.device.token">Token</label>
+          <input type="text" class="form-control" name="token" id="field_token" data-cy="token" formControlName="token" />
+          @if (editForm.get('token')!.invalid && (editForm.get('token')!.dirty || editForm.get('token')!.touched)) {
+            <div>
+              @if (editForm.get('token')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_model" jhiTranslate="bokyoonApp.device.model">Model</label>
+          <input type="text" class="form-control" name="model" id="field_model" data-cy="model" formControlName="model" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_osVersion" jhiTranslate="bokyoonApp.device.osVersion">Os Version</label>
+          <input type="text" class="form-control" name="osVersion" id="field_osVersion" data-cy="osVersion" formControlName="osVersion" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_isActive" jhiTranslate="bokyoonApp.device.isActive">Is Active</label>
+          <input type="checkbox" class="form-check" name="isActive" id="field_isActive" data-cy="isActive" formControlName="isActive" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdAt" jhiTranslate="bokyoonApp.device.createdAt">Created At</label>
+          <input type="text" class="form-control" name="createdAt" id="field_createdAt" data-cy="createdAt" formControlName="createdAt" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_updatedAt" jhiTranslate="bokyoonApp.device.updatedAt">Updated At</label>
+          <input type="text" class="form-control" name="updatedAt" id="field_updatedAt" data-cy="updatedAt" formControlName="updatedAt" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

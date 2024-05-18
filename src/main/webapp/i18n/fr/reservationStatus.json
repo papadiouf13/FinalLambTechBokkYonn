@@ -1,0 +1,10 @@
+{
+  "bokyoonApp": {
+    "ReservationStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "CONFIRMED": "CONFIRMED",
+      "CANCELED": "CANCELED"
+    }
+  }
+}

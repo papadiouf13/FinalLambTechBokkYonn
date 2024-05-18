@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (car()) {
+      <div>
+        <h2 data-cy="carDetailsHeading"><span jhiTranslate="bokyoonApp.car.detail.title">Car</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ car()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.car.name">Name</span></dt>
+          <dd>
+            <span>{{ car()!.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.car.description">Description</span></dt>
+          <dd>
+            <span>{{ car()!.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.car.numberOfSeats">Number Of Seats</span></dt>
+          <dd>
+            <span>{{ car()!.numberOfSeats }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.car.numberOfAvailableSeats">Number Of Available Seats</span></dt>
+          <dd>
+            <span>{{ car()!.numberOfAvailableSeats }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.car.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ car()!.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.car.plateNumber">Plate Number</span></dt>
+          <dd>
+            <span>{{ car()!.plateNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.car.transporter">Transporter</span></dt>
+          <dd>
+            @if (car()!.transporter) {
+              <div>
+                <a [routerLink]="['/transporter', car()!.transporter?.id, 'view']">{{ car()!.transporter?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/car', car()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

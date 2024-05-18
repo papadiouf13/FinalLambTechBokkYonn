@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (trip()) {
+      <div>
+        <h2 data-cy="tripDetailsHeading"><span jhiTranslate="bokyoonApp.trip.detail.title">Trip</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ trip()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.trip.name">Name</span></dt>
+          <dd>
+            <span>{{ trip()!.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.trip.description">Description</span></dt>
+          <dd>
+            <span>{{ trip()!.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.trip.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'bokyoonApp.TripStatus.' + (trip()!.status ?? 'null')">{{
+              { null: '', SCHEDULED: 'SCHEDULED', IN_PROGRESS: 'IN_PROGRESS', COMPLETED: 'COMPLETED', CANCELED: 'CANCELED' }[
+                trip()!.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.trip.departureDate">Departure Date</span></dt>
+          <dd>
+            <span>{{ trip()!.departureDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.trip.arrivalDate">Arrival Date</span></dt>
+          <dd>
+            <span>{{ trip()!.arrivalDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.trip.price">Price</span></dt>
+          <dd>
+            <span>{{ trip()!.price }}</span>
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.trip.departureLocation">Departure Location</span></dt>
+          <dd>
+            @if (trip()!.departureLocation) {
+              <div>
+                <a [routerLink]="['/location', trip()!.departureLocation?.id, 'view']">{{ trip()!.departureLocation?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.trip.arrivalLocation">Arrival Location</span></dt>
+          <dd>
+            @if (trip()!.arrivalLocation) {
+              <div>
+                <a [routerLink]="['/location', trip()!.arrivalLocation?.id, 'view']">{{ trip()!.arrivalLocation?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.trip.car">Car</span></dt>
+          <dd>
+            @if (trip()!.car) {
+              <div>
+                <a [routerLink]="['/car', trip()!.car?.id, 'view']">{{ trip()!.car?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="bokyoonApp.trip.transporter">Transporter</span></dt>
+          <dd>
+            @if (trip()!.transporter) {
+              <div>
+                <a [routerLink]="['/transporter', trip()!.transporter?.id, 'view']">{{ trip()!.transporter?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/trip', trip()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

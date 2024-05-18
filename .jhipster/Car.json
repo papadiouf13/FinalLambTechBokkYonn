@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20240517165513"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numberOfSeats",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "numberOfAvailableSeats",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "plateNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    }
+  ],
+  "name": "Car",
+  "relationships": [
+    {
+      "otherEntityName": "transporter",
+      "relationshipName": "transporter",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

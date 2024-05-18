@@ -1,0 +1,139 @@
+<div>
+  <h2 id="page-heading" data-cy="CarHeading">
+    <span jhiTranslate="bokyoonApp.car.home.title">Cars</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="bokyoonApp.car.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-car"
+        [routerLink]="['/car/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="bokyoonApp.car.home.createLabel">Créer un nouveau Car</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (cars?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="bokyoonApp.car.home.notFound">Aucun Car trouvé</span>
+    </div>
+  }
+
+  @if (cars && cars.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.car.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.car.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="numberOfSeats">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.car.numberOfSeats">Number Of Seats</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="numberOfAvailableSeats">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.car.numberOfAvailableSeats">Number Of Available Seats</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isActive">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.car.isActive">Is Active</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="plateNumber">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.car.plateNumber">Plate Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="transporter.id">
+              <div class="d-flex">
+                <span jhiTranslate="bokyoonApp.car.transporter">Transporter</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (car of cars; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/car', car.id, 'view']">{{ car.id }}</a>
+              </td>
+              <td>{{ car.name }}</td>
+              <td>{{ car.description }}</td>
+              <td>{{ car.numberOfSeats }}</td>
+              <td>{{ car.numberOfAvailableSeats }}</td>
+              <td>{{ car.isActive }}</td>
+              <td>{{ car.plateNumber }}</td>
+              <td>
+                @if (car.transporter) {
+                  <div>
+                    <a [routerLink]="['/transporter', car.transporter.id, 'view']">{{ car.transporter.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/car', car.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/car', car.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(car)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

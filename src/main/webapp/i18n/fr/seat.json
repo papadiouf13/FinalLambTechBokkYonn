@@ -1,0 +1,26 @@
+{
+  "bokyoonApp": {
+    "seat": {
+      "home": {
+        "title": "Seats",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Seat",
+        "createOrEditLabel": "Créer ou éditer un Seat",
+        "notFound": "Aucun Seat trouvé"
+      },
+      "created": "Un nouveau Seat a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Seat avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Seat avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Seat {{ id }} ?"
+      },
+      "detail": {
+        "title": "Seat"
+      },
+      "id": "ID",
+      "seatNumber": "Seat Number",
+      "isAvailable": "Is Available",
+      "car": "Car"
+    }
+  }
+}
